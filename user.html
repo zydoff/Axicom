@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>User Dashboard</h1>
+    </div>
+    <div class="container">
+        <!-- Cart Section -->
+        <div class="section" id="cart-section">
+            <h2>Cart</h2>
+            <button class="btn" onclick="payCart()">Payment</button>
+            <button class="btn" onclick="cancelCart()">Cancel</button>
+            <div>Total Amount: <span id="totalAmount">0</span></div>
+        </div>
+
+        <!-- Guest List Section -->
+        <div class="section" id="guest-list-section">
+            <h2>Guest List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="guestList">
+                    <tr>
+                        <td>John Doe</td>
+                        <td>
+                            <button class="btn" onclick="updateGuest(this)">Update</button>
+                            <button class="btn" onclick="deleteGuest(this)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Order Status Section -->
+        <div class="section" id="order-status-section">
+            <h2>Order Status</h2>
+            <button class="btn" onclick="checkStatus()">Check Status</button>
+            <div id="statusResult">No orders yet.</div>
+        </div>
+
+        <!-- Vendor List Section -->
+        <div class="section" id="vendor-section">
+            <h2>Vendors</h2>
+            <select id="vendorList">
+                <option value="Vendor1">Catering</option>
+                <option value="Vendor2">Florist</option>
+                <option value="Vendor3">Decoration</option>
+                <option value="Vendor3">Lighting</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        function payCart() {
+            alert('Payment processed successfully!');
+            document.getElementById('totalAmount').textContent = '0';
+        }
+
+        function cancelCart() {
+            alert('Cart canceled.');
+            document.getElementById('totalAmount').textContent = '0';
+        }
+
+        function updateGuest(button) {
+            const row = button.closest('tr');
+            const name = row.cells[0].textContent;
+            const newName = prompt('Update Guest Name', name);
+            if (newName) {
+                row.cells[0].textContent = newName;
+            }
+        }
+
+        function deleteGuest(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
+        function checkStatus() {
+            document.getElementById('statusResult').textContent = 'Your order is being processed.';
+        }
+    </script>
+</body>
+</html>

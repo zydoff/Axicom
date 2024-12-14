@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="error" style="color: red; display: none;">Invalid credentials</p>
+    </div>
+
+    <script>
+        // Sample user data stored in a JSON object
+        const users = {
+            "user": { username: "user", password: "user", role: "User" },
+            "admin": { username: "admin", password: "admin", role: "Admin" },
+            "vendor": { username: "vendor", password: "vendor", role: "Vendor" }
+        };
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('error');
+
+            // Validate user credentials
+            if (users[username] && users[username].password === password) {
+                const role = users[username].role;
+
+                // Redirect based on role
+                if (role === "User") {
+                    window.location.href = "user.html";
+                } else if (role === "Admin") {
+                    window.location.href = "admin.html";
+                } else if (role === "Vendor") {
+                    window.location.href = "vendor.html";
+                }
+            } else {
+                error.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
